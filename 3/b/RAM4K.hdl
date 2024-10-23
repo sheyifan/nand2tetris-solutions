@@ -13,5 +13,32 @@ CHIP RAM4K {
     OUT out[16];
 
     PARTS:
-    //// Replace this comment with your code.
+    DMux8Way(
+        in = load, sel = address[9..11],
+        a = L0To511,
+        b = L512To1023,
+        c = L1024To1535,
+        d = L1536To2047,
+        e = L2048To2559,
+        f = L2560To3071,
+        g = L3072To3583,
+        h = L3584To4095);
+    RAM512(in = in, load = L0To511, address = address[0..8], out = DATA0To511);
+    RAM512(in = in, load = L512To1023,  address = address[0..8], out = DATA512To1023);
+    RAM512(in = in, load = L1024To1535, address = address[0..8], out = DATA1024To1535);
+    RAM512(in = in, load = L1536To2047, address = address[0..8], out = DATA1536To2047);
+    RAM512(in = in, load = L2048To2559, address = address[0..8], out = DATA2048To2559);
+    RAM512(in = in, load = L2560To3071, address = address[0..8], out = DATA2560To3071);
+    RAM512(in = in, load = L3072To3583, address = address[0..8], out = DATA3072To3583);
+    RAM512(in = in, load = L3584To4095, address = address[0..8], out = DATA3584To4095);
+    Mux8Way16(
+        a = DATA0To511,
+        b = DATA512To1023,
+        c = DATA1024To1535,
+        d = DATA1536To2047,
+        e = DATA2048To2559,
+        f = DATA2560To3071,
+        g = DATA3072To3583,
+        h = DATA3584To4095,
+        sel = address[9..11], out = out);
 }
