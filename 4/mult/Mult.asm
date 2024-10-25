@@ -8,3 +8,27 @@
 // The algorithm is based on repetitive addition.
 
 //// Replace this comment with your code.
+
+(INI)
+@2
+M = 0
+
+(OVERLAY)
+@1
+D = M;
+@END
+D; JLE
+@1
+M = M - 1
+@0
+D = M
+@2
+M = M + D
+@OVERLAY
+0; JMP
+
+(END)
+@END
+0; JMP
+
+
